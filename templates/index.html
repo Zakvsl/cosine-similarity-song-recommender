@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎵 Sistem Rekomendasi Lagu Berdasarkan Mood</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <h1>🎵 Music Recommendation System</h1>
+        <p class="subtitle">Temukan lagu yang cocok dengan mood Anda!</p>
+      </header>
+
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Input Form -->
+        <div class="card">
+          <h2>📝 Formulir Input Mood</h2>
+          <form id="recommendationForm">
+            <div class="form-group">
+              <label for="mood">
+                <span class="emoji">😊</span> Pilih Mood Anda:
+              </label>
+              <select id="mood" name="mood" required>
+                <option value="">-- Pilih Mood --</option>
+                {% for mood in moods %}
+                <option value="{{ mood }}">{{ mood }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="energy">
+                <span class="emoji">⚡</span> Level Energi:
+              </label>
+              <select id="energy" name="energy" required>
+                <option value="">-- Pilih Level Energi --</option>
+                {% for energy in energy_levels %}
+                <option value="{{ energy }}">{{ energy }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              🎼 Dapatkan Rekomendasi
+            </button>
+          </form>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading" style="display: none">
+          <div class="spinner"></div>
+          <p>Mencari lagu terbaik untuk Anda...</p>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="results" style="display: none">
+          <div class="card">
+            <h2>🎧 Rekomendasi Lagu untuk Anda</h2>
+            <p id="resultMessage" class="result-message"></p>
+
+            <div id="recommendationsList" class="recommendations-list">
+              <!-- Recommendations will be inserted here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="card stats-card">
+          <h2>📊 Statistik Dataset</h2>
+          <div id="stats" class="stats-content">
+            <p>Loading statistics...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>🎵 Sistem Pemberi Rekomendasi - Content-Based Filtering</p>
+        <p>- 2025</p>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
