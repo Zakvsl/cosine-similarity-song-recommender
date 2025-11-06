@@ -20,35 +20,49 @@
       <!-- Main Content -->
       <div class="content">
         <!-- Input Form -->
-        <div class="card">
-          <h2>📝 Formulir Input Mood</h2>
+        <div class="card form-card">
+          <h2>📝 Pilih Preferensi Musik Anda</h2>
+          <p class="form-description">
+            Pilih mood dan energi Anda, lalu kami akan merekomendasikan lagu
+            yang sempurna untuk Anda!
+          </p>
+
           <form id="recommendationForm">
             <div class="form-group">
               <label for="mood">
-                <span class="emoji">😊</span> Pilih Mood Anda:
+                <span class="emoji">😊</span> Bagaimana Perasaan Anda Hari Ini?
               </label>
               <select id="mood" name="mood" required>
-                <option value="">-- Pilih Mood --</option>
+                <option value="">-- Pilih Mood Anda --</option>
                 {% for mood in moods %}
-                <option value="{{ mood }}">{{ mood }}</option>
+                <option value="{{ mood }}">
+                  {% if mood == 'Happy' %}😊 Happy (Bahagia) {% elif mood ==
+                  'Sad' %}😢 Sad (Sedih) {% elif mood == 'Relaxed' %}😌 Relaxed
+                  (Santai) {% elif mood == 'Motivated' %}💪 Motivated
+                  (Termotivasi) {% else %}{{ mood }} {% endif %}
+                </option>
                 {% endfor %}
               </select>
             </div>
 
             <div class="form-group">
               <label for="energy">
-                <span class="emoji">⚡</span> Level Energi:
+                <span class="emoji">⚡</span> Tingkat Energi yang Diinginkan?
               </label>
               <select id="energy" name="energy" required>
                 <option value="">-- Pilih Level Energi --</option>
                 {% for energy in energy_levels %}
-                <option value="{{ energy }}">{{ energy }}</option>
+                <option value="{{ energy }}">
+                  {% if energy == 'High' %}⚡ High (Tinggi) {% elif energy ==
+                  'Medium' %}🔋 Medium (Sedang) {% elif energy == 'Low' %}🌙 Low
+                  (Rendah) {% else %}{{ energy }} {% endif %}
+                </option>
                 {% endfor %}
               </select>
             </div>
 
             <button type="submit" class="btn btn-primary">
-              🎼 Dapatkan Rekomendasi
+              🎼 Cari Rekomendasi Lagu
             </button>
           </form>
         </div>
@@ -56,12 +70,12 @@
         <!-- Loading Spinner -->
         <div id="loading" class="loading" style="display: none">
           <div class="spinner"></div>
-          <p>Mencari lagu terbaik untuk Anda...</p>
+          <p>Sedang mencari lagu terbaik untuk Anda...</p>
         </div>
 
         <!-- Results Section -->
         <div id="results" class="results" style="display: none">
-          <div class="card">
+          <div class="card results-card">
             <h2>🎧 Rekomendasi Lagu untuk Anda</h2>
             <p id="resultMessage" class="result-message"></p>
 
@@ -70,20 +84,12 @@
             </div>
           </div>
         </div>
-
-        <!-- Statistics Section -->
-        <div class="card stats-card">
-          <h2>📊 Statistik Dataset</h2>
-          <div id="stats" class="stats-content">
-            <p>Loading statistics...</p>
-          </div>
-        </div>
       </div>
 
       <!-- Footer -->
       <footer class="footer">
-        <p>🎵 Sistem Pemberi Rekomendasi - Content-Based Filtering</p>
-        <p>- 2025</p>
+        <p>🎵 Sistem Rekomendasi Lagu Berbasis Mood</p>
+        <p>Content-Based Filtering dengan Cosine Similarity</p>
       </footer>
     </div>
 

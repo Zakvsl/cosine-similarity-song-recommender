@@ -1,6 +1,6 @@
-// Load statistics on page load
+// Handle form submission when page loads
 document.addEventListener("DOMContentLoaded", function () {
-  loadStatistics();
+  console.log("🎵 Music Recommendation System loaded!");
 });
 
 // Handle form submission
@@ -103,63 +103,6 @@ function displayRecommendations(data) {
 
   // Scroll to results
   resultsDiv.scrollIntoView({ behavior: "smooth" });
-}
-
-// Load statistics
-async function loadStatistics() {
-  try {
-    const response = await fetch("/stats");
-    const data = await response.json();
-
-    if (response.ok) {
-      displayStatistics(data);
-    }
-  } catch (error) {
-    console.error("Error loading statistics:", error);
-    document.getElementById("stats").innerHTML =
-      "<p>Failed to load statistics.</p>";
-  }
-}
-
-// Display statistics
-function displayStatistics(data) {
-  const statsDiv = document.getElementById("stats");
-
-  let html = `
-        <div class="stat-item">
-            <h3>📀 Total Lagu</h3>
-            <div class="stat-value">${data.total_songs}</div>
-        </div>
-        
-        <div class="stat-item">
-            <h3>🎸 Genre</h3>
-            <ul class="stat-list">
-                ${Object.entries(data.genres)
-                  .map(([genre, count]) => `<li>${genre}: ${count}</li>`)
-                  .join("")}
-            </ul>
-        </div>
-        
-        <div class="stat-item">
-            <h3>😊 Mood</h3>
-            <ul class="stat-list">
-                ${Object.entries(data.moods)
-                  .map(([mood, count]) => `<li>${mood}: ${count}</li>`)
-                  .join("")}
-            </ul>
-        </div>
-        
-        <div class="stat-item">
-            <h3>⚡ Energy Level</h3>
-            <ul class="stat-list">
-                ${Object.entries(data.energy_levels)
-                  .map(([energy, count]) => `<li>${energy}: ${count}</li>`)
-                  .join("")}
-            </ul>
-        </div>
-    `;
-
-  statsDiv.innerHTML = html;
 }
 
 // Add smooth scrolling
